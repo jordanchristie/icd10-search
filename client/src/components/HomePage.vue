@@ -23,15 +23,16 @@ export default {
   data() {
     return {
       searchMethod: "Term",
-      searchResults: {}
+      searchResults: []
     };
   },
   methods: {
     handleSearchChange() {
       this.searchMethod = this.searchMethod == "Term" ? "Code" : "Term";
     },
-    getSearchResults(code) {
-      this.searchResults = code
+    getSearchResults(codes) {
+      console.log(codes)
+      this.searchResults = codes
     }
   }
 };

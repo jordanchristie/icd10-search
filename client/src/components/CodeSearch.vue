@@ -41,19 +41,30 @@ export default {
   methods: {
     async searchByTerms(e) {
       e.preventDefault();
-      const res = await fetch(`http://www.icd10api.com/?code=${this.term}&desc=long`);
-      //const res = await fetch(`https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code&terms=${this.searchTerm}`)
+
+      const res = await fetch(`https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name&terms=${this.term}`)
+      // const res = await fetch('https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name&terms=tuberc')
       const data = await res.json();
 
-      console.log(data);
+      const formattedData = await data[3].map(code => ({
+        name: code[0],
+        description: code[1]
+      }))
+
+      this.$emit('getSearchResults', formattedData);
     },
     async searchByCode(e) {
       e.preventDefault();
       const res = await fetch(`http://www.icd10api.com/?code=${this.code}&desc=long&r=json`);
-      //const res = await fetch(`https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code&terms=${this.searchTerm}`)
+  
       const data = await res.json();
 
-      return this.$emit('getSearchResults', data)
+      const formattedData = {
+        name: data.Name,
+        description: data.Description
+      }
+
+      return this.$emit('getSearchResults', formattedData);
     }
   }
 };

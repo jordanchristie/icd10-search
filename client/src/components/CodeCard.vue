@@ -1,7 +1,11 @@
 <template>
   <section>
-    {{ searchResults.Name }} <br/>
-    {{ searchResults.Description }}
+
+    <article v-for="result in searchResults" :key="result.name">
+      {{ result.name }} <br/>
+      {{ result.description }}
+    </article>
+
   </section>
 </template>
 
