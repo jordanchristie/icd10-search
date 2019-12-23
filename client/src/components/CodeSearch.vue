@@ -43,17 +43,17 @@ export default {
       e.preventDefault();
       const res = await fetch(`http://www.icd10api.com/?code=${this.term}&desc=long`);
       //const res = await fetch(`https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code&terms=${this.searchTerm}`)
-      const json = await res.json();
+      const data = await res.json();
 
-      console.log(json);
+      console.log(data);
     },
     async searchByCode(e) {
       e.preventDefault();
       const res = await fetch(`http://www.icd10api.com/?code=${this.code}&desc=long&r=json`);
       //const res = await fetch(`https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code&terms=${this.searchTerm}`)
-      const json = await res.json();
+      const data = await res.json();
 
-      console.log(json);
+      return this.$emit('getSearchResults', data)
     }
   }
 };
