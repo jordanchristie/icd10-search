@@ -1,8 +1,8 @@
 <template>
   <div class="home-page">
-  <h1>I am teh VUE</h1>
-  <button @click="handleSearchChange">Search by {{searchBy}}</button>
-  <code-search :searchMethod="searchBy" @update:="searchTerm" />
+    <h1>ICD-10 Code Finder</h1>
+    <button @click="handleSearchChange">Search by {{searchMethod}}</button>
+    <code-search :searchMethod="searchMethod"/>
   </div>
 </template>
 
@@ -15,14 +15,12 @@ export default {
   },
   data() {
     return {
-      searchBy: "Term",
-      searchTerm: "",
-      code: ""
+      searchMethod: "Term"
     }
   },
   methods: {
     handleSearchChange() {
-      this.searchBy = this.searchBy == 'Term' ? 'Code' : 'Term' 
+      this.searchMethod = this.searchMethod == 'Term' ? 'Code' : 'Term' 
     }
   }
 };
