@@ -1,9 +1,11 @@
 <template>
   <div class="home-page">
     <h1>ICD-10 Code Finder</h1>
-    <button @click="handleSearchChange">Search by {{ searchMethod }}</button>
+    <button 
+      @click="toggleSearch">Search by {{ termSearch ? "Term" : "Code" }}
+    </button>
     <code-search 
-      :searchMethod="searchMethod"
+      :termSearch="termSearch"
       @getSearchResults="getSearchResults" />
     <code-card 
       :searchResults="searchResults" 
@@ -22,13 +24,15 @@ export default {
   },
   data() {
     return {
-      searchMethod: "Term",
+      termSearch: true,
       searchResults: []
     };
   },
   methods: {
-    handleSearchChange() {
-      this.searchMethod = this.searchMethod == "Term" ? "Code" : "Term";
+    toggleSearch() {
+      this.searchResults = [];
+      this.termSearch = !this.termSearch;
+      
     },
     getSearchResults(codes) {
       console.log(codes)
@@ -39,5 +43,16 @@ export default {
 </script>
 
 <style>
-
+  button, input[type=submit] {
+    font-size: 24px;
+    margin: 1em;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 15px 20px;
+    transition: background .3s ease;
+  }
+  button:hover, input[type=submit]:hover {
+    background: #F012BE;
+    transition: background .3s ease;
+  }
 </style>
