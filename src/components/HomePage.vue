@@ -1,15 +1,14 @@
 <template>
   <div class="home-page">
     <h1>ICD-10 Code Finder</h1>
-    <button 
-      @click="toggleSearch">Search by {{ termSearch ? "Term" : "Code" }}
+    <button @click="toggleSearch">
+      Search by {{ termSearch ? "Term" : "Code" }}
     </button>
-    <code-search 
+    <code-search
       :termSearch="termSearch"
-      @getSearchResults="getSearchResults" />
-    <code-card 
-      :searchResults="searchResults" 
-      />
+      @getSearchResults="getSearchResults"
+    />
+    <code-card :searchResults="searchResults" />
   </div>
 </template>
 
@@ -32,27 +31,27 @@ export default {
     toggleSearch() {
       this.searchResults = [];
       this.termSearch = !this.termSearch;
-      
     },
     getSearchResults(codes) {
-      console.log(codes)
-      this.searchResults = codes
+      this.searchResults = codes;
     }
   }
 };
 </script>
 
 <style>
-  button, input[type=submit] {
-    font-size: 24px;
-    margin: 1em;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 15px 20px;
-    transition: background .3s ease;
-  }
-  button:hover, input[type=submit]:hover {
-    background: #F012BE;
-    transition: background .3s ease;
-  }
+button,
+input[type="submit"] {
+  font-size: 24px;
+  margin: 1em;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 15px 20px;
+  transition: background 0.3s ease;
+}
+button:hover,
+input[type="submit"]:hover {
+  background: #f012be;
+  transition: background 0.3s ease;
+}
 </style>
